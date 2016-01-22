@@ -21,7 +21,7 @@
          */
         'app.layout',
         'app.login',
-        // 'app.books'
+        'app.books'
     ]);
 
 })();

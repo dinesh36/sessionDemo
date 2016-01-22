@@ -7,10 +7,19 @@
 
     /* @ngInject */
     function dataservice($http, $location, $q, exception, logger) {
+        var apiLink = '/api/';
         var isPrimed = false;
         var primePromise;
 
         var service = {
+            login:login,
+            signup:signup,
+            signout:signout,
+            session:session,
+            getBooks:getBooks,
+            createBook:createBook,
+            deleteBook:deleteBook,
+            updateBook:updateBook,
             getAvengersCast: getAvengersCast,
             getAvengerCount: getAvengerCount,
             getAvengers: getAvengers,
@@ -18,6 +27,38 @@
         };
 
         return service;
+
+        function getBooks(){
+            return $http.get(apiLink + 'books');
+        }
+
+        function createBook(book){
+            return $http.get(apiLink + 'books');   
+        }
+
+        function deleteBook(book){
+            return $http.get(apiLink + 'books');   
+        }
+
+        function updateBook(book){
+            return $http.get(apiLink + 'books');   
+        }
+
+        function login(user){
+            return $http.post(apiLink + 'auth/signin',user);
+        }
+
+        function signup(user){
+            return $http.post(apiLink + 'auth/signup',user);
+        }
+
+        function signout(){
+            return $http.get(apiLink + 'auth/signout');
+        }
+
+        function session(){
+            return $http.get(apiLink + 'auth/session');   
+        }
 
         function getAvengers() {
             //??? Does cors not applied for the ports ?
