@@ -35,7 +35,7 @@ function CallTreeWrapperAPI(req,res){
     }
     
     // var url = Utils.checkSSL();
-    var url = 'http://192.168.0.159:7200';
+    var url = 'http://192.168.0.13:7200';
     console.log('calling api for the path :: ' +   url+req.path);
     console.log('with options :: '+ JSON.stringify(options));
 

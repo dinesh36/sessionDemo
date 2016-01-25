@@ -13,6 +13,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 7200;
 var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+var expressJwt = require('express-jwt');
+var secret = 'This is the secret';
+
 mongoose.connect('mongodb://localhost/loginTest');
 
 app.use(session({
@@ -40,22 +44,52 @@ app.use(favicon(__dirname + '/favicon.ico'));
 //user defined modules
 var users = require('./users')(app);
 
-//authentication middleware
-app.use(function(req,res,next){
-    console.log('inside the auth middleware')
-    console.log(req.session.isLogin);
-    if(req.session.isLogin){
-        next();
-    } else {
-        res.status(401);
-        res.send({message:'unauthorized'});
-    }
+app.post('/authenticate', function (req, res) {
+ 
+  var profile = {
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'john@doe.com',
+    id: 123
+  };
+
+  // We are sending the profile inside the token
+  var token = jwt.sign(profile, secret, { expiresInMinutes: 60*5 });
+
+  res.json({ token: token });
 });
 
-//temp middleware
-app.route('/api/books').get(function(req,res){
-    res.send([{book1:'1'},{book2:'2'},{book3:'3'}]);
+
+
+//authentication middleware
+// app.use(function(req,res,next){
+//     console.log('inside the auth middleware')
+//     console.log(req.session.isLogin);
+//     if(req.session.isLogin){
+//         next();
+//     } else {
+//         res.status(401);
+//         res.send({message:'unauthorized'});
+//     }
+// });
+app.use('/api', expressJwt({secret: secret}));
+
+app.get('/api/restricted', function (req, res) {
+  console.log('user ' + req.user.id + ' is calling /api/restricted');
+  res.json({
+    name: 'foo'
+  });
 });
+
+
+
+
+var books = require('./books')(app);
+
+//temp middleware
+// app.route('/api/books').get(function(req,res){
+//     res.send([{book1:'1'},{book2:'2'},{book3:'3'}]);
+// });
 
 
 

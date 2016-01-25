@@ -17,6 +17,7 @@
             signout:signout,
             session:session,
             getBooks:getBooks,
+            getBook:getBook,
             createBook:createBook,
             deleteBook:deleteBook,
             updateBook:updateBook,
@@ -28,35 +29,42 @@
 
         return service;
 
-        function getBooks(){
+        
+
+        function createBook(book) {
+            return $http.post(apiLink + 'books',book);   
+        }
+
+        function getBooks() {
             return $http.get(apiLink + 'books');
         }
 
-        function createBook(book){
-            return $http.get(apiLink + 'books');   
+
+        function getBook(bookId){
+            return $http.get(apiLink + 'books/'+bookId);
         }
 
-        function deleteBook(book){
-            return $http.get(apiLink + 'books');   
+        function deleteBook(bookId) {
+            return $http.delete(apiLink + 'books/'+bookId);
         }
 
-        function updateBook(book){
-            return $http.get(apiLink + 'books');   
+        function updateBook(book) {
+            return $http.put(apiLink + 'books/'+book._id,book);
         }
 
-        function login(user){
-            return $http.post(apiLink + 'auth/signin',user);
+        function login(user) {
+            return $http.post(apiLink + 'auth/signin', user);
         }
 
-        function signup(user){
-            return $http.post(apiLink + 'auth/signup',user);
+        function signup(user) {
+            return $http.post(apiLink + 'auth/signup', user);
         }
 
-        function signout(){
+        function signout() {
             return $http.get(apiLink + 'auth/signout');
         }
 
-        function session(){
+        function session() {
             return $http.get(apiLink + 'auth/session');   
         }
 

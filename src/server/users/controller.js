@@ -48,10 +48,14 @@ exports.signin = function (req, res, next) {
     });
 };
 
+/** 
+ * Check for the login session
+ */
 exports.session = function (req, res, next) {
     if(req.session.isLogin=='Y'){
         console.log('logged in');
         res.status(200);
+        res.send({message:'user is logged in'});
     } else {
         res.status(401);
         res.send({message:'not authorized'});

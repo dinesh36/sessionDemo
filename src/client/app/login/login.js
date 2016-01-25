@@ -14,7 +14,7 @@
             logger.info('loggin in ... ');
             dataservice.login(lg.user).success(function () {
                 logger.info('logged in');
-                $state.go('books');
+                $state.go('booksHome');
             }).catch(function(err){
                 logger.error(err.data.message);
             })

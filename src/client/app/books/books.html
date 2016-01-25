@@ -1,2 +1,9 @@
-This is the books file
-<button ng-click="bk.signout()">Logout</button>
+
+<div ng-repeat="book in bk.books">
+	<h2><a href="#/books/{{book._id}}">{{book.title}}</a><h2><br>
+	<h5>{{book.description}}</h5><br>
+	<h5>{{book.auther}}</h5><br>
+</div>
+
+<a href="#/addBook" class="btn btn-success">Add New Book</a>
+<button ng-click="bk.signout()" class="btn btn-danger">Logout</button>

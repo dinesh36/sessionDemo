@@ -1,0 +1,19 @@
+<h1>Book Info </h1>
+<form role="form">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" placeholder="title" ng-model="bookCtrl.book.title">
+  </div>
+  <div class="form-group">
+    <label for="title">Auther</label>
+    <input type="text" class="form-control" id="title" placeholder="auther" ng-model="bookCtrl.book.auther">
+  </div>
+  <div class="form-group">
+    <label for="title">Description</label>
+    <textarea class="form-control" id="title" placeHolder="description" ng-model="bookCtrl.book.description"/>
+  </div>
+  <a href="#/books" class="btn btn-link">Books</a>
+  <button type="submit" class="btn btn-info" ng-if="bookCtrl.isUpdate" ng-click="bookCtrl.update()">Update</button>
+  <button type="submit" class="btn btn-success" ng-if="!bookCtrl.isUpdate" ng-click="bookCtrl.save()">Add</button>
+  <button type="submit" class="btn btn-danger" ng-if="bookCtrl.isUpdate" ng-click="bookCtrl.remove()">Delete</button>
+</form>
